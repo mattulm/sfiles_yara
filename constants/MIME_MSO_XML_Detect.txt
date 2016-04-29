@@ -1,0 +1,67 @@
+rule mime_mso
+{
+meta:
+    comment = "mime mso detection"
+    author = "malwaretracker.com @mwtracker"
+strings:
+ $a="application/x-mso"
+ $b="MIME-Version"
+ $c="?mso-application"
+condition:
+ $a and $b or $c
+}
+
+
+rule mime_mso_embedded_SuppData
+{
+meta:
+    comment = "mime mso office obfuscation"
+    hash = "77739ab6c20e9dfbeffa3e2e6960e156"
+    author = "malwaretracker.com @mwtracker"
+    date = "Mar 5 2015"
+
+strings:
+    $a = "docSuppData"
+    $b = "binData"
+    $c = "schemas.microsoft.com"
+
+condition:
+    all of them
+}
+
+
+rule mime_mso_embedded_ole
+{
+meta:
+    comment = "mime mso office obfuscation"
+    hash = "77739ab6c20e9dfbeffa3e2e6960e156"
+    author = "malwaretracker.com @mwtracker"
+    date = "Mar 5 2015"
+
+strings:
+    $a = "docOleData"
+    $b = "binData"
+    $c = "schemas.microsoft.com"
+
+condition:
+    all of them
+}
+
+
+
+
+rule mime_mso_vba_macros
+{
+meta:
+    comment = "mime mso office obfuscation"
+    hash = "77739ab6c20e9dfbeffa3e2e6960e156"
+    author = "malwaretracker.com @mwtracker"
+    date = "Mar 5 2015"
+
+strings:
+    $a = "macrosPresent=\"yes\""
+    $b = "schemas.microsoft.com"
+
+condition:
+    all of them
+}
